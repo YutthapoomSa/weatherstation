@@ -27,11 +27,11 @@ export class CreateTransectionDto {
 
     @ApiProperty()
     @IsNumber()
-    lat: number;
+    lat: bigint;
 
     @ApiProperty()
     @IsNumber()
-    lon: number;
+    lon: bigint;
 
     @ApiProperty()
     @IsNumber()
@@ -39,7 +39,7 @@ export class CreateTransectionDto {
 
     @ApiProperty()
     @IsNumber()
-    temperature: number;
+    temperature: bigint;
 }
 
 export class CreateTransectionResDTOData {
@@ -56,13 +56,13 @@ export class CreateTransectionResDTOData {
     @ApiProperty()
     heatIndex: number;
     @ApiProperty()
-    lat: number;
+    lat: bigint;
     @ApiProperty()
-    lon: number;
+    lon: bigint;
     @ApiProperty()
     humidity: number;
     @ApiProperty()
-    temperature: number;
+    temperature: bigint;
 }
 
 export class CreateTransectionResDTO {

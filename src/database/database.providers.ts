@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import { ConfigService } from './../shared/config/config.service';
+import { DeviceDB } from './entity/device.entity';
 import { TransectionDB } from './entity/transection.entity';
 import { UserPasswordDB } from './entity/user-password.entity';
 import { UserSocketDB } from './entity/user-socket.entity';
@@ -11,7 +12,8 @@ export enum DataBase {
     UserTokenDB = 'UserTokenDB',
     UserSocketDB = 'UserSocketDB',
     UserPasswordDB = 'UserPasswordDB',
-    TransectionDB = 'TransectionDB'
+    TransectionDB = 'TransectionDB',
+    DeviceDB = 'DeviceDB',
 }
 
 export const dbProviders = [
@@ -37,6 +39,10 @@ export const dbProviders = [
         provide: DataBase.TransectionDB,
         useValue: TransectionDB,
     },
+    {
+        provide: DataBase.DeviceDB,
+        useValue: DeviceDB,
+    },
 ];
 
 export const databaseProviders = [
@@ -45,8 +51,8 @@ export const databaseProviders = [
         useFactory: async (configService: ConfigService) => {
             const sequelize = new Sequelize(configService.sequelizeOrmConfig);
             // tslint:disable-next-line:max-line-length
-            sequelize.addModels([UserDB, UserTokenDB, UserSocketDB, UserPasswordDB, TransectionDB]);
-            // await sequelize.sync({ alter: true });
+            sequelize.addModels([UserDB, UserTokenDB, UserSocketDB, UserPasswordDB, TransectionDB, DeviceDB]);
+            await sequelize.sync({ alter: true });
             // await sequelize.sync({ force: true });
             return sequelize;
         },

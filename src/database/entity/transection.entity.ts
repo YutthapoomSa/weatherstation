@@ -1,4 +1,5 @@
-import { Column, CreatedAt, DataType, Model, Table, UpdatedAt } from 'sequelize-typescript';
+import { Column, CreatedAt, DataType, ForeignKey, Model, Table, UpdatedAt } from 'sequelize-typescript';
+import { DeviceDB } from './device.entity';
 
 @Table({
     tableName: 'transection',
@@ -13,12 +14,6 @@ export class TransectionDB extends Model<TransectionDB> {
         primaryKey: true,
     })
     id: number;
-
-    @Column({
-        type: DataType.INTEGER,
-        allowNull: false,
-    })
-    deviceId: number;
 
     @Column({
         type: DataType.INTEGER,
@@ -41,16 +36,16 @@ export class TransectionDB extends Model<TransectionDB> {
     heatIndex: number;
 
     @Column({
-        type: DataType.FLOAT,
+        type: DataType.BIGINT,
         comment: 'ละติจูด',
     })
-    lat: number;
+    lat: bigint;
 
     @Column({
-        type: DataType.FLOAT,
+        type: DataType.BIGINT,
         comment: 'ลองติจูด',
     })
-    lon: number;
+    lon: bigint;
 
     @Column({
         type: DataType.NUMBER,
@@ -58,13 +53,21 @@ export class TransectionDB extends Model<TransectionDB> {
     humidity: number;
 
     @Column({
-        type: DataType.FLOAT,
+        type: DataType.BIGINT,
     })
-    temperature: number;
+    temperature: bigint;
 
     @CreatedAt
     readonly createdAt?: Date;
 
     @UpdatedAt
     readonly updatedAt?: Date;
+
+    @ForeignKey(() => DeviceDB)
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: true,
+        field: 'device_id',
+    })
+    deviceId: number;
 }
