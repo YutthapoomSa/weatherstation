@@ -36,26 +36,26 @@ export class TransectionDB extends Model<TransectionDB> {
     heatIndex: number;
 
     @Column({
-        type: DataType.BIGINT,
+        type: DataType.DOUBLE,
         comment: 'ละติจูด',
     })
-    lat: bigint;
+    lat: number;
 
     @Column({
-        type: DataType.BIGINT,
+        type: DataType.DOUBLE,
         comment: 'ลองติจูด',
     })
-    lon: bigint;
+    lon: number;
 
     @Column({
-        type: DataType.NUMBER,
+        type: DataType.INTEGER,
     })
     humidity: number;
 
     @Column({
-        type: DataType.BIGINT,
+        type: DataType.DOUBLE,
     })
-    temperature: bigint;
+    temperature: number;
 
     @CreatedAt
     readonly createdAt?: Date;
