@@ -2,10 +2,10 @@ import { Column, CreatedAt, DataType, ForeignKey, Model, Table, UpdatedAt } from
 import { DeviceDB } from './device.entity';
 
 @Table({
-    tableName: 'transection',
+    tableName: 'transaction',
     comment: 'ตารางข้อมูล transection',
 })
-export class TransectionDB extends Model<TransectionDB> {
+export class TransactionDB extends Model<TransactionDB> {
     @Column({
         type: DataType.INTEGER,
         allowNull: false,

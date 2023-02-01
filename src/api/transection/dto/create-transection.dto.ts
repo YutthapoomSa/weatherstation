@@ -1,9 +1,9 @@
-import { TransectionDB } from './../../../database/entity/transection.entity';
+import { TransactionDB } from './../../../database/entity/transection.entity';
 import { IsNotEmpty, IsNumber, IsString, IsBoolean } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { ResStatus } from 'src/shared/enum/res-status.enum';
 import { IsFloat } from 'sequelize-typescript';
-export class CreateTransectionDto {
+export class CreateTransactionDto {
     @ApiProperty()
     @IsNumber()
     @IsNotEmpty()
@@ -27,11 +27,11 @@ export class CreateTransectionDto {
 
     @ApiProperty()
     @IsNumber()
-    lat: bigint;
+    lat: number;
 
     @ApiProperty()
     @IsNumber()
-    lon: bigint;
+    lon: number;
 
     @ApiProperty()
     @IsNumber()
@@ -39,10 +39,10 @@ export class CreateTransectionDto {
 
     @ApiProperty()
     @IsNumber()
-    temperature: bigint;
+    temperature: number;
 }
 
-export class CreateTransectionResDTOData {
+export class CreateTransactionResDTOData {
     @ApiProperty()
     id: number;
     @ApiProperty()
@@ -56,16 +56,16 @@ export class CreateTransectionResDTOData {
     @ApiProperty()
     heatIndex: number;
     @ApiProperty()
-    lat: bigint;
+    lat: number;
     @ApiProperty()
-    lon: bigint;
+    lon: number;
     @ApiProperty()
     humidity: number;
     @ApiProperty()
-    temperature: bigint;
+    temperature: number;
 }
 
-export class CreateTransectionResDTO {
+export class CreateTransactionResDTO {
     @ApiProperty({
         enum: Object.keys(ResStatus).map((k) => ResStatus[k]),
         description: 'รหัสสถานะ',
@@ -73,20 +73,20 @@ export class CreateTransectionResDTO {
     resCode: ResStatus;
 
     @ApiProperty({
-        type: () => CreateTransectionResDTOData,
+        type: () => CreateTransactionResDTOData,
         description: 'ข้อมูล',
     })
-    resData: CreateTransectionResDTOData;
+    resData: CreateTransactionResDTOData;
 
     @ApiProperty({
         description: 'ข้อความอธิบาย',
     })
     msg: string;
 
-    constructor(resCode: ResStatus, msg: string, datas: TransectionDB) {
+    constructor(resCode: ResStatus, msg: string, datas: TransactionDB) {
         this.resCode = resCode;
         this.msg = msg;
-        this.resData = new CreateTransectionResDTOData();
+        this.resData = new CreateTransactionResDTOData();
 
         if (!!datas) {
             this.resData.id = datas.id;

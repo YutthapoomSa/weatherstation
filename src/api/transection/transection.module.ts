@@ -1,14 +1,13 @@
-import { ApiUsersService } from './../users/services/api-users.service';
 import { Module } from '@nestjs/common';
 import { SharedModule } from 'src/shared/shared.module';
-import { TransectionService } from './service/transection.service';
-import { TransectionController } from './transection.controller';
-import { ApiTransectionService } from './service/api-transection.service';
+import { ApiTransactionService } from './service/api-transection.service';
+import { TransactionService } from './service/transection.service';
+import { TransactionController } from './transection.controller';
 
 @Module({
     imports: [SharedModule],
-    controllers: [TransectionController],
-    providers: [TransectionService, ApiTransectionService],
-    exports: [TransectionService],
+    controllers: [TransactionController],
+    providers: [TransactionService, ApiTransactionService],
+    exports: [TransactionService],
 })
 export class TransectionModule {}

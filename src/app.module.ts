@@ -1,4 +1,4 @@
-import { ApiTransectionService } from './api/transection/service/api-transection.service';
+import { ApiTransactionService } from './api/transection/service/api-transection.service';
 import { CacheModule, Module } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ThrottlerModule } from '@nestjs/throttler';
@@ -21,6 +21,6 @@ import { TransectionModule } from './api/transection/transection.module';
         }),
         TransectionModule,
     ],
-    providers: [ApiTransectionService, LogService, ConvertImageService, EncryptionService, PaginationService],
+    providers: [ApiTransactionService, LogService, ConvertImageService, EncryptionService, PaginationService],
 })
 export class AppModule {}

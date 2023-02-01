@@ -1,19 +1,19 @@
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { TransectionService } from './service/transection.service';
-import { CreateTransectionDto, CreateTransectionResDTO } from './dto/create-transection.dto';
+import { TransactionService } from './service/transection.service';
+import { CreateTransactionDto, CreateTransactionResDTO } from './dto/create-transection.dto';
 import { UpdateTransectionDto } from './dto/update-transection.dto';
-import { ApiTransectionService } from './service/api-transection.service';
+import { ApiTransactionService } from './service/api-transection.service';
 
-@ApiTags('transection')
-@Controller('transection')
-export class TransectionController {
-    constructor(private readonly transectionApiService: ApiTransectionService) {}
+@ApiTags('transaction')
+@Controller('transaction')
+export class TransactionController {
+    constructor(private readonly transactionApiService: ApiTransactionService) {}
 
     @Post()
     @ApiOperation({ summary: 'สร้างรายการเมนู' })
-    @ApiOkResponse({ type: CreateTransectionResDTO })
-    async create(@Body() body: CreateTransectionDto) {
-        return await this.transectionApiService.api_create(body);
+    @ApiOkResponse({ type: CreateTransactionResDTO })
+    async create(@Body() body: CreateTransactionDto) {
+        return await this.transactionApiService.api_create(body);
     }
 }

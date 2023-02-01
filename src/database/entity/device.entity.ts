@@ -1,4 +1,4 @@
-import { TransectionDB } from './transection.entity';
+import { TransactionDB } from './transection.entity';
 import { Column, CreatedAt, DataType, HasMany, Model, Table, UpdatedAt } from 'sequelize-typescript';
 
 @Table({
@@ -27,6 +27,6 @@ export class DeviceDB extends Model<DeviceDB> {
     @UpdatedAt
     readonly updatedAt?: Date;
 
-    @HasMany(() => TransectionDB)
-    transectionLists: TransectionDB[];
+    @HasMany(() => TransactionDB)
+    transectionLists: TransactionDB[];
 }

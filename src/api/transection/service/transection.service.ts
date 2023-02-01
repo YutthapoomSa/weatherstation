@@ -2,27 +2,27 @@ import { HttpException, HttpStatus, Inject, Injectable, OnApplicationBootstrap }
 import { Sequelize } from 'sequelize';
 import { DataBase } from 'src/database/database.providers';
 import { LogService } from 'src/helper/services/log.service';
-import { CreateTransectionDto } from '../dto/create-transection.dto';
-import { TransectionDB } from './../../../database/entity/transection.entity';
+import { CreateTransactionDto } from '../dto/create-transection.dto';
+import { TransactionDB as TransactionDB } from './../../../database/entity/transection.entity';
 
 @Injectable()
-export class TransectionService implements OnApplicationBootstrap {
-    private logger = new LogService(TransectionService.name);
+export class TransactionService implements OnApplicationBootstrap {
+    private logger = new LogService(TransactionService.name);
 
     constructor(
-        @Inject(DataBase.TransectionDB) private readonly transectionRepositoryModel: typeof TransectionDB,
+        @Inject(DataBase.TransactionDB) private readonly transactionRepositoryModel: typeof TransactionDB,
         @Inject('SEQUELIZE') private readonly sequelize: Sequelize,
     ) {}
 
     onApplicationBootstrap() {
         //
     }
-    async create(body: CreateTransectionDto) {
+    async create(body: CreateTransactionDto) {
         const tag = this.create.name;
         try {
             if (!body) throw new Error('data is required');
 
-            const result = new TransectionDB();
+            const result = new TransactionDB();
             result.deviceId = body.deviceId;
             result.pm2 = body.pm2;
             result.pm10 = body.pm10;
