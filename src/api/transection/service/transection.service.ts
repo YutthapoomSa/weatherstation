@@ -26,8 +26,8 @@ export class TransactionService implements OnApplicationBootstrap {
             result.deviceId = body.deviceId;
             result.pm2 = body.pm2;
             result.pm10 = body.pm10;
-            result.siteName = body.siteName;
-            result.heatIndex = body.heatIndex;
+            result.site_name = body.site_name;
+            result.heat_index = body.heat_index;
             result.lat = body.lat;
             result.lon = body.lon;
             result.humidity = body.humidity;

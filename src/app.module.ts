@@ -1,3 +1,4 @@
+import { ApiDeviceService } from './api/device/service/api-device.service';
 import { ApiTransactionService } from './api/transection/service/api-transection.service';
 import { CacheModule, Module } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
@@ -9,6 +10,7 @@ import { LogService } from './helper/services/log.service';
 import { PaginationService } from './helper/services/pagination/pagination.service';
 import { SharedModule } from './shared/shared.module';
 import { TransectionModule } from './api/transection/transection.module';
+import { DeviceModule } from './api/device/device.module';
 @Module({
     imports: [
         CacheModule.register(),
@@ -20,7 +22,15 @@ import { TransectionModule } from './api/transection/transection.module';
             limit: 60,
         }),
         TransectionModule,
+        DeviceModule,
     ],
-    providers: [ApiTransactionService, LogService, ConvertImageService, EncryptionService, PaginationService],
+    providers: [
+        ApiDeviceService,
+        ApiTransactionService,
+        LogService,
+        ConvertImageService,
+        EncryptionService,
+        PaginationService,
+    ],
 })
 export class AppModule {}
