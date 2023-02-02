@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsISO8601, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import moment from 'moment';
 import { ResStatus } from 'src/shared/enum/res-status.enum';
 import { TransactionDB } from './../../../database/entity/transection.entity';
 export class CreateTransactionDto {
@@ -26,11 +27,11 @@ export class CreateTransactionDto {
 
     @ApiProperty()
     @IsNumber()
-    lat: number;
+    coor_lat: number;
 
     @ApiProperty()
     @IsNumber()
-    lon: number;
+    coor_lon: number;
 
     @ApiProperty()
     @IsNumber()
@@ -39,6 +40,11 @@ export class CreateTransactionDto {
     @ApiProperty()
     @IsNumber()
     temperature: number;
+
+    @ApiProperty()
+    @IsISO8601()
+    @IsNotEmpty()
+    date_data: string;
 }
 
 export class CreateTransactionResDTOData {
@@ -55,13 +61,15 @@ export class CreateTransactionResDTOData {
     @ApiProperty()
     heat_index: number;
     @ApiProperty()
-    lat: number;
+    coor_lat: number;
     @ApiProperty()
-    lon: number;
+    coor_lon: number;
     @ApiProperty()
     humidity: number;
     @ApiProperty()
     temperature: number;
+    @ApiProperty()
+    date_data: string;
 }
 
 export class CreateTransactionResDTO {
@@ -94,10 +102,11 @@ export class CreateTransactionResDTO {
             this.resData.pm10 = datas.pm10;
             this.resData.site_name = datas.site_name;
             this.resData.heat_index = datas.heat_index;
-            this.resData.lat = datas.lat;
-            this.resData.lon = datas.lon;
+            this.resData.coor_lat = datas.coor_lat;
+            this.resData.coor_lon = datas.coor_lon;
             this.resData.humidity = datas.humidity;
             this.resData.temperature = datas.temperature;
+            this.resData.date_data = moment(datas.date_data).format('YYY-MM-DD')
         }
     }
 }
