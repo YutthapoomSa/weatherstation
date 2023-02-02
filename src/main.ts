@@ -26,7 +26,7 @@ async function bootstrap() {
     app.use(urlencoded({ extended: true, limit: '300mb' }));
     app.set('x-powered-by', false);
     setupSwagger(app);
-    await app.listen(3000);
+    await app.listen(3333);
 }
 
 bootstrap();
