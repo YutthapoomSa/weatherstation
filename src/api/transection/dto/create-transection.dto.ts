@@ -1,8 +1,7 @@
-import { TransactionDB } from './../../../database/entity/transection.entity';
-import { IsNotEmpty, IsNumber, IsString, IsBoolean } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { ResStatus } from 'src/shared/enum/res-status.enum';
-import { IsFloat } from 'sequelize-typescript';
+import { TransactionDB } from './../../../database/entity/transection.entity';
 export class CreateTransactionDto {
     @ApiProperty()
     @IsNumber()
@@ -19,11 +18,11 @@ export class CreateTransactionDto {
 
     @ApiProperty()
     @IsString()
-    siteName: string;
+    site_name: string;
 
     @ApiProperty()
     @IsNumber()
-    heatIndex: number;
+    heat_index: number;
 
     @ApiProperty()
     @IsNumber()
@@ -52,9 +51,9 @@ export class CreateTransactionResDTOData {
     @ApiProperty()
     pm10: number;
     @ApiProperty()
-    siteName: string;
+    site_name: string;
     @ApiProperty()
-    heatIndex: number;
+    heat_index: number;
     @ApiProperty()
     lat: number;
     @ApiProperty()
@@ -93,8 +92,8 @@ export class CreateTransactionResDTO {
             this.resData.deviceId = datas.deviceId;
             this.resData.pm2 = datas.pm2;
             this.resData.pm10 = datas.pm10;
-            this.resData.siteName = datas.siteName;
-            this.resData.heatIndex = datas.heatIndex;
+            this.resData.site_name = datas.site_name;
+            this.resData.heat_index = datas.heat_index;
             this.resData.lat = datas.lat;
             this.resData.lon = datas.lon;
             this.resData.humidity = datas.humidity;

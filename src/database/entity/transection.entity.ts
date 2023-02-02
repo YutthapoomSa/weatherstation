@@ -27,13 +27,15 @@ export class TransactionDB extends Model<TransactionDB> {
 
     @Column({
         type: DataType.STRING,
+        comment: 'สถานที่',
     })
-    siteName: string;
+    site_name: string;
 
     @Column({
         type: DataType.INTEGER,
+        comment: 'ดัชนีความร้อน',
     })
-    heatIndex: number;
+    heat_index: number;
 
     @Column({
         type: DataType.DOUBLE,
@@ -49,11 +51,13 @@ export class TransactionDB extends Model<TransactionDB> {
 
     @Column({
         type: DataType.INTEGER,
+        comment: 'ความชื้น',
     })
     humidity: number;
 
     @Column({
         type: DataType.DOUBLE,
+        comment: 'อุณหภูมิ',
     })
     temperature: number;
 

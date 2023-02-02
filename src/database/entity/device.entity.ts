@@ -19,7 +19,7 @@ export class DeviceDB extends Model<DeviceDB> {
         type: DataType.STRING,
         allowNull: false,
     })
-    deviceName: string;
+    device_name: string;
 
     @CreatedAt
     readonly createdAt?: Date;
