@@ -41,13 +41,13 @@ export class TransactionDB extends Model<TransactionDB> {
         type: DataType.DOUBLE,
         comment: 'ละติจูด',
     })
-    lat: number;
+    coor_lat: number;
 
     @Column({
         type: DataType.DOUBLE,
         comment: 'ลองติจูด',
     })
-    lon: number;
+    coor_lon: number;
 
     @Column({
         type: DataType.INTEGER,
@@ -60,6 +60,13 @@ export class TransactionDB extends Model<TransactionDB> {
         comment: 'อุณหภูมิ',
     })
     temperature: number;
+
+    @Column({
+        type: DataType.DATE,
+        comment: 'วัน',
+        allowNull: false,
+    })
+    date_data: string;
 
     @CreatedAt
     readonly createdAt?: Date;
