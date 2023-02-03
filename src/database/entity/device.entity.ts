@@ -10,7 +10,7 @@ export class DeviceDB extends Model<DeviceDB> {
         type: DataType.INTEGER,
         allowNull: false,
         autoIncrement: true,
-        unique: 'unique_user_id',
+        unique: 'device_id',
         primaryKey: true,
     })
     id: number;
@@ -29,4 +29,5 @@ export class DeviceDB extends Model<DeviceDB> {
 
     @HasMany(() => TransactionDB)
     transectionLists: TransactionDB[];
+    
 }

@@ -20,10 +20,12 @@ export class TransactionController {
         return await this.transactionApiService.api_create(body);
     }
 
-    // @Post('paginationTransaction')
-    // @ApiOperation({ summary: 'Pagination Transaction' })
-    // @ApiOkResponse({ type: TransactionPaginationResDTO })
-    // paginationAgency(@Body() paginationDTO: TransactionDTO): Promise<TransactionPaginationResDTO> {
-    //     return this.transactionService.transactionPagination(paginationDTO);
-    // }
+    @Post('paginationTransaction')
+    @ApiOperation({ summary: 'Pagination Transaction' })
+    @ApiOkResponse({ type: TransactionPaginationResDTO })
+    async paginationAgency(@Body() paginationDTO: TransactionDTO): Promise<TransactionPaginationResDTO> {
+        return await this.transactionService.transactionPagination(paginationDTO);
+    }
+
+
 }

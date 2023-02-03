@@ -1,5 +1,4 @@
 import { HttpException, HttpStatus, Inject, Injectable, OnApplicationBootstrap } from '@nestjs/common';
-import moment from 'moment';
 import { FindOptions, Op, Sequelize } from 'sequelize';
 import { DataBase } from 'src/database/database.providers';
 import { LogService } from 'src/helper/services/log.service';
@@ -7,16 +6,18 @@ import { ResStatus } from 'src/shared/enum/res-status.enum';
 import { CreateTransactionDto } from '../dto/create-transection.dto';
 import { TransactionDTO, TransactionPaginationResDTO } from '../dto/pagination.dto';
 import { TransactionDB } from './../../../database/entity/transection.entity';
+import { PaginationService } from './../../../helper/services/pagination/pagination.service';
+import { DeviceDB } from './../../../database/entity/device.entity';
 
 @Injectable()
 export class TransactionService implements OnApplicationBootstrap {
     private logger = new LogService(TransactionService.name);
-    paginationService: any;
-    foodRepositoryModel: any;
 
     constructor(
         @Inject(DataBase.TransactionDB) private readonly transactionRepositoryModel: typeof TransactionDB,
         @Inject('SEQUELIZE') private readonly sequelize: Sequelize,
+        private paginationService: PaginationService
+
     ) {}
 
     onApplicationBootstrap() {
@@ -78,15 +79,15 @@ export class TransactionService implements OnApplicationBootstrap {
 
             let findOption: FindOptions = {
                 order: [['createdAt', 'DESC']],
-                // include: [
-                //     {
-                //         model: AgencySecondaryDB,
-                //         attributes: { exclude: ['createdAt', 'updatedAt'] },
-                //     },
-                // ],
+                include: [
+                    {
+                        model: DeviceDB,
+                        attributes: { exclude: ['id', 'device_name']}
+                    }
+                ]
             };
             if (paginationDTO.search) {
-                const dataLike = this.paginationService.genSqlLike(['date_data', ''], paginationDTO.search);
+                const dataLike = this.paginationService.genSqlLike(['date_data','site_name'], paginationDTO.search);
                 if (dataLike) {
                     findOption = Object.assign(findOption, dataLike);
                 }

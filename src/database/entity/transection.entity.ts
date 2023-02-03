@@ -1,4 +1,4 @@
-import { Column, CreatedAt, DataType, ForeignKey, Model, Table, UpdatedAt } from 'sequelize-typescript';
+import { BelongsTo, Column, CreatedAt, DataType, ForeignKey, Model, Table, UpdatedAt } from 'sequelize-typescript';
 import { DeviceDB } from './device.entity';
 
 @Table({
@@ -10,7 +10,7 @@ export class TransactionDB extends Model<TransactionDB> {
         type: DataType.INTEGER,
         allowNull: false,
         autoIncrement: true,
-        unique: 'unique_user_id',
+        unique: 'unique_transaction_id',
         primaryKey: true,
     })
     id: number;
@@ -81,4 +81,7 @@ export class TransactionDB extends Model<TransactionDB> {
         field: 'device_id',
     })
     deviceId: number;
+
+    @BelongsTo(() => DeviceDB)
+    deviceLists: DeviceDB;
 }

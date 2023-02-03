@@ -96,7 +96,6 @@ export class CreateTransactionResDTO {
 
         if (!!datas) {
             this.resData.id = datas.id;
-            this.resData.deviceId = datas.deviceId;
             this.resData.pm2 = datas.pm2;
             this.resData.pm10 = datas.pm10;
             this.resData.site_name = datas.site_name;

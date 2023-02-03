@@ -26,6 +26,13 @@ export class TransactionDTO {
     search: string;
 }
 
+export class DeviceData {
+    @ApiProperty()
+    device_id: number;
+    @ApiProperty()
+    device_name: string;
+}
+
 export class TransactionDTOData {
     @ApiProperty()
     id: number;
@@ -47,6 +54,8 @@ export class TransactionDTOData {
     temperature: number;
     @ApiProperty()
     date_data: string;
+    @ApiProperty()
+    deviceId: number;
 }
 
 export class TransactionPaginationResDTOResData {
@@ -76,10 +85,10 @@ export class TransactionPaginationResDTO {
     resCode: ResStatus;
 
     @ApiProperty({
-        type: () => TransactionPaginationResDTOResData,
+        type: () => [TransactionPaginationResDTOResData],
         description: 'ข้อมูล',
     })
-    resData: TransactionPaginationResDTOResData;
+    resData: TransactionPaginationResDTOResData[];
 
     @ApiProperty({
         description: 'ข้อความอธิบาย',
@@ -97,6 +106,7 @@ export class TransactionPaginationResDTO {
     ) {
         this.resCode = resStatus;
         this.msg = msg;
+        this.resData = [];
 
         const _resData = new TransactionPaginationResDTOResData();
         _resData.itemsPerPage = itemsPerPage;
@@ -109,6 +119,7 @@ export class TransactionPaginationResDTO {
             for (const data of datas) {
                 const _data = new TransactionDTOData();
                 _data.id = data.id;
+                _data.deviceId = data.deviceId;
                 _data.pm2 = data.pm2;
                 _data.pm10 = data.pm10;
                 _data.site_name = data.site_name;
@@ -117,9 +128,10 @@ export class TransactionPaginationResDTO {
                 _data.coor_lon = data.coor_lon;
                 _data.humidity = data.humidity;
                 _data.temperature = data.temperature;
-                _data.date_data = moment(data.date_data).format('YYY-MM-DD');
+                _data.date_data = moment(data.date_data).format('YYYY-MM-DD');
+                _resData.datas.push(_data);
             }
+            this.resData.push(_resData);
         }
-        this.resData = _resData;
     }
 }
