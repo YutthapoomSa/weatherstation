@@ -52,7 +52,7 @@ export const databaseProviders = [
             const sequelize = new Sequelize(configService.sequelizeOrmConfig);
             // tslint:disable-next-line:max-line-length
             sequelize.addModels([UserDB, UserTokenDB, UserSocketDB, UserPasswordDB, TransactionDB, DeviceDB]);
-            await sequelize.sync({ alter: true });
+            // await sequelize.sync({ alter: true });
             // await sequelize.sync({ force: true });
             return sequelize;
         },

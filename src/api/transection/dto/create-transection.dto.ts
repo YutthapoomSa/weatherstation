@@ -43,7 +43,7 @@ export class CreateTransactionDto {
 
     @ApiProperty()
     @IsISO8601()
-    date_data: string;
+    date_data: Date;
 }
 
 export class CreateTransactionResDTOData {
@@ -105,7 +105,7 @@ export class CreateTransactionResDTO {
             this.resData.coor_lon = datas.coor_lon;
             this.resData.humidity = datas.humidity;
             this.resData.temperature = datas.temperature;
-            this.resData.date_data = moment(datas.date_data).format('YYY-MM-DD')
+            this.resData.date_data = moment(datas.date_data).format('YYYY-MM-DD HH:mm:ss');
         }
     }
 }

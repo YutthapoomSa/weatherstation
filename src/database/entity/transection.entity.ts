@@ -64,6 +64,7 @@ export class TransactionDB extends Model<TransactionDB> {
     @Column({
         type: DataType.STRING,
         comment: 'วัน',
+        defaultValue: new Date(),
     })
     date_data: Date;
 

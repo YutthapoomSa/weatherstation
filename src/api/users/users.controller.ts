@@ -14,29 +14,29 @@ import { UserLoginRefreshToKenReqDto } from './dto/user-login-refreshToken.dto';
 export class UsersController {
     constructor(private readonly apiUsersService: ApiUsersService) {}
 
-    @Post('register')
-    @ApiOkResponse({ type: FindOneUserResDTO })
-    register(@Body() body: CreateUserReqDTO) {
-        return this.apiUsersService.api_create(body);
-    }
+    // @Post('register')
+    // @ApiOkResponse({ type: FindOneUserResDTO })
+    // register(@Body() body: CreateUserReqDTO) {
+    //     return this.apiUsersService.api_create(body);
+    // }
 
-    @Post('login')
-    login(@Body() body: UserLoginRequestDTO) {
-        return this.apiUsersService.api_login(body);
-    }
+    // @Post('login')
+    // login(@Body() body: UserLoginRequestDTO) {
+    //     return this.apiUsersService.api_login(body);
+    // }
 
-    @Get(':id')
-    @ApiBearerAuth()
-    @UseGuards(AuthGuard('jwt'))
-    @ApiOkResponse({ type: FindOneUserResDTO })
-    find(@Param('id') id: number): Promise<FindOneUserResDTO> {
-        return this.apiUsersService.api_findOne(id);
-    }
+    // @Get(':id')
+    // @ApiBearerAuth()
+    // @UseGuards(AuthGuard('jwt'))
+    // @ApiOkResponse({ type: FindOneUserResDTO })
+    // find(@Param('id') id: number): Promise<FindOneUserResDTO> {
+    //     return this.apiUsersService.api_findOne(id);
+    // }
 
-    @Post('refreshToken')
-    @ApiBearerAuth()
-    @UseGuards(AuthGuard('jwt'))
-    refreshToken(@User() user: UserDB, @Body() body: UserLoginRefreshToKenReqDto) {
-        return this.apiUsersService.api_refreshToken(user, body);
-    }
+    // @Post('refreshToken')
+    // @ApiBearerAuth()
+    // @UseGuards(AuthGuard('jwt'))
+    // refreshToken(@User() user: UserDB, @Body() body: UserLoginRefreshToKenReqDto) {
+    //     return this.apiUsersService.api_refreshToken(user, body);
+    // }
 }
