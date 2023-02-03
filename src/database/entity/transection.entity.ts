@@ -62,11 +62,10 @@ export class TransactionDB extends Model<TransactionDB> {
     temperature: number;
 
     @Column({
-        type: DataType.DATE,
+        type: DataType.STRING,
         comment: 'วัน',
-        allowNull: false,
     })
-    date_data: string;
+    date_data: Date;
 
     @CreatedAt
     readonly createdAt?: Date;

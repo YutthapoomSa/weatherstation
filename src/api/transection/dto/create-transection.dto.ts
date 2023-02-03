@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsISO8601, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsDateString, IsISO8601, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import moment from 'moment';
 import { ResStatus } from 'src/shared/enum/res-status.enum';
 import { TransactionDB } from './../../../database/entity/transection.entity';
@@ -43,7 +43,6 @@ export class CreateTransactionDto {
 
     @ApiProperty()
     @IsISO8601()
-    @IsNotEmpty()
     date_data: string;
 }
 
