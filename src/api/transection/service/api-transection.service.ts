@@ -29,7 +29,7 @@ export class ApiTransactionService implements OnApplicationBootstrap {
     async api_create(body: CreateTransactionDto,event: string): Promise<CreateTransactionResDTO> {
         const tag = this.api_create.name;
         try {
-            return new CreateTransactionResDTO(ResStatus.success, '', await this.transactionService.create(body,event));
+            return new CreateTransactionResDTO(ResStatus.success, 'นำเข้าข้อมูลสำเร็จ', await this.transactionService.create(body));
         } catch (error) {
             this.logger.error(`${tag} -> `, error);
             throw new HttpException(`${error}`, HttpStatus.INTERNAL_SERVER_ERROR);
