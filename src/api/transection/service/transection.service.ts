@@ -8,6 +8,10 @@ import { TransactionDTO, TransactionPaginationResDTO } from '../dto/pagination.d
 import { TransactionDB } from './../../../database/entity/transection.entity';
 import { PaginationService } from './../../../helper/services/pagination/pagination.service';
 import { DeviceDB } from './../../../database/entity/device.entity';
+import moment from 'moment';
+
+const lineNotify = require('line-notify-nodejs')('d3K7eG2kRtKVOA7RYQqESarSUwqQHGCvBjgQInDWN0E');
+// const token = ''
 
 @Injectable()
 export class TransactionService implements OnApplicationBootstrap {
@@ -16,14 +20,13 @@ export class TransactionService implements OnApplicationBootstrap {
     constructor(
         @Inject(DataBase.TransactionDB) private readonly transactionRepositoryModel: typeof TransactionDB,
         @Inject('SEQUELIZE') private readonly sequelize: Sequelize,
-        private paginationService: PaginationService
-
+        private paginationService: PaginationService,
     ) {}
 
     onApplicationBootstrap() {
         //
     }
-    async create(body: CreateTransactionDto) {
+    async create(body: CreateTransactionDto, event: string) {
         const tag = this.create.name;
         try {
             if (!body) throw new Error('data is required');
@@ -40,7 +43,10 @@ export class TransactionService implements OnApplicationBootstrap {
             result.temperature = body.temperature;
             result.date_data = body.date_data;
 
-            await result.save();
+            const resultsave = await result.save();
+            if (resultsave)  await this.lineNotifySend(event);
+            if (!resultsave)  await this.lineNotifySend(event);
+
             return result;
         } catch (error) {
             this.logger.error(`${tag} -> `, error);
@@ -82,12 +88,12 @@ export class TransactionService implements OnApplicationBootstrap {
                 include: [
                     {
                         model: DeviceDB,
-                        attributes: { exclude: ['id', 'device_name']}
-                    }
-                ]
+                        attributes: { exclude: ['id', 'device_name'] },
+                    },
+                ],
             };
             if (paginationDTO.search) {
-                const dataLike = this.paginationService.genSqlLike(['date_data','site_name'], paginationDTO.search);
+                const dataLike = this.paginationService.genSqlLike(['date_data', 'site_name'], paginationDTO.search);
                 if (dataLike) {
                     findOption = Object.assign(findOption, dataLike);
                 }
@@ -134,6 +140,26 @@ export class TransactionService implements OnApplicationBootstrap {
                 resData.totalPages,
                 resData.currentPage,
             );
+        } catch (error) {
+            console.error(`${tag} -> `, error);
+            this.logger.error(`${tag} -> `, error);
+            throw new HttpException(`${error}`, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async lineNotifySend(event: string) {
+        const tag = this.lineNotifySend.name;
+        try {
+            lineNotify
+                .notify({
+                    message: `\n ส่งข้อมูล ${event} \n เวลา : ${moment()
+                        .locale('th')
+                        .add(543, 'year')
+                        .format('DD MM YYYY, h:mm:ss a')}`,
+                })
+                .then(() => {
+                    console.log('Sent complete');
+                });
         } catch (error) {
             console.error(`${tag} -> `, error);
             this.logger.error(`${tag} -> `, error);
