@@ -16,8 +16,8 @@ export class TransactionController {
     @Post()
     @ApiOperation({ summary: 'สร้างรายการ Transaction' })
     @ApiOkResponse({ type: CreateTransactionResDTO })
-    async create(@Body() body: CreateTransactionDto) {
-        return await this.transactionApiService.api_create(body);
+    async create(@Body() body: CreateTransactionDto, event: string) {
+        return await this.transactionApiService.api_create(body, event);
     }
 
     @Post('paginationTransaction')
@@ -26,6 +26,4 @@ export class TransactionController {
     async paginationAgency(@Body() paginationDTO: TransactionDTO): Promise<TransactionPaginationResDTO> {
         return await this.transactionService.transactionPagination(paginationDTO);
     }
-
-
 }

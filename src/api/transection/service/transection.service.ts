@@ -44,8 +44,9 @@ export class TransactionService implements OnApplicationBootstrap {
             result.date_data = body.date_data;
 
             const resultsave = await result.save();
-            if (resultsave)  await this.lineNotifySend(event);
-            if (!resultsave)  await this.lineNotifySend(event);
+            if (resultsave) await this.lineNotifySend(event);
+            if (!resultsave) await this.lineNotifySend(event);
+            return resultsave;
 
             return result;
         } catch (error) {
